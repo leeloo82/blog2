@@ -29,7 +29,7 @@ class HomeController extends AbstractController
         $repository = $entityManager->getRepository(Article::class);
 
         $article = $repository->findDistinct();
-        self::print_q($article);
+       // self::print_q($article);
         return $this->render('home/index.html.twig', [
             'List_annee' => $article
         ]);
@@ -63,7 +63,7 @@ class HomeController extends AbstractController
         $article = $repository->findByTitle($val);
         /**/
         $article=$article[0];
-        self::print_q($article);
+       // self::print_q($article);
         return $this->render('article/ArticleDescription.html.twig', [
             'detail_article' => $article,
         ]);

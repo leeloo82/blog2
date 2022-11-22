@@ -11,11 +11,13 @@ use Doctrine\ORM\EntityManagerInterface;
 class ArticleController extends AbstractController
 {
     //creation d'une fonction statique d'affichage
-    static function print_q($val){
+    static function print_q($val)
+    {
         echo "<pre style='background-color:#000;color:#3FBBD5;font-size:11px;z-index:99999;position:relative;'>";
         print_r($val);
         echo "</pre>";
     }
+
     /**
      * @Route("/home_article", name="app_home_home")
      */
@@ -29,7 +31,7 @@ class ArticleController extends AbstractController
     /**
      * @Route("/articleObject", name="app_article_object")
      */
-  public function articleObject(EntityManagerInterface $entityManager)
+    public function articleObject(EntityManagerInterface $entityManager)
     {
 
         $article = new Article();
@@ -46,6 +48,7 @@ class ArticleController extends AbstractController
         ]);
 
     }
+
     /**
      * @Route("/article", name="app_article")
      */
@@ -58,22 +61,23 @@ class ArticleController extends AbstractController
         $article = $repository->findAll();
         //self::print_q($article);
 
-       return $this->render('article/article.html.twig', [
+        return $this->render('article/article.html.twig', [
             'list_article' => $article,
         ]);
 
     }
+
     /**
      * @Route("/article/{id}", name="app_description_article")
      */
-    public function displayDetailArticle($id,EntityManagerInterface $entityManager): response
+    public function displayDetailArticle($id, EntityManagerInterface $entityManager): response
     {
 
         //reception de l'objet de la la class repository
         $repository = $entityManager->getRepository(Article::class);
         //appel de la fonction pour effectuer un select all dans la class repository find est par defaut
         $article = $repository->find($id);
-        self::print_q($article);
+        //self::print_q($article);
         return $this->render('article/ArticleDescription.html.twig', [
             'detail_article' => $article,
         ]);
@@ -82,7 +86,7 @@ class ArticleController extends AbstractController
     /**
      * @Route("/magique/{value}", name="app_magique_article")
      */
-  public function displayMagiqueArticle($value,EntityManagerInterface $entityManager): response
+    public function displayMagiqueArticle($value, EntityManagerInterface $entityManager): response
     {
 
         //reception de l'objet de la la class repository
@@ -94,4 +98,16 @@ class ArticleController extends AbstractController
             'magique_article' => $article,
         ]);
     }
+
+    /**
+     * @Route("/article/afficher/{id}", name="afficherById")
+     */
+    public function afficherById(Article $article): Response
+    {
+        //self::print_q($article);
+        return $this->render('article/afficher.html.twig', [
+            'article' => $article,
+        ]);
+    }
+
 }
