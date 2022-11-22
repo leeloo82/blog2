@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello HomeController!{% endblock %}
+
+{% block body %}
+
+
+    <h1>Années de parution d'articles</h1>
+<div class="example-wrapper">
+
+    {# acces aux data d'un tableau de tableau #}
+    {% for key in List_annee%}
+        {# recuperation de la valeur du click pour traitement pour la requete sql -> recup de l'annee selectionné dans val #}
+        <a class=" list-group-item list-group-item-action" href="{{ path('app_annee',{ val: key.annee }) }}">{{ key.annee }}</a>
+
+    {% endfor %}
+
+</div>
+{% endblock %}

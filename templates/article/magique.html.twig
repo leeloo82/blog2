@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Magique{% endblock %}
+
+{% block body %}
+<h1>Listing des article contenant le mot "magique"</h1>
+
+    <div>
+        {% for key in magique_article %}
+            <a class=" list-group-item list-group-item-action" href="{{ path('app_description_article', { id: key.id }) }}">{{key.titre }}</a>
+        {% endfor %}
+    </div>
+{% endblock %}

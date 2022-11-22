@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+{% block title %}Détail-article{% endblock %}
+
+{% block body %}
+    {# declaration de variable dans twig #}
+
+    {% set dateCreation = detail_article.DateCreation|date('d-m-Y')%}
+
+    <div class="card" style="text-align: center;margin:auto auto ;width:50%">
+        <div class="card-body">
+            <h5 class="card-title">{{detail_article.titre}}</h5>
+            <p class="card-text">{{detail_article.description}}</p>
+            <p class="card-text">Date de création:{{dateCreation}}</p>
+        </div>
+    </div>
+
+{% endblock %}

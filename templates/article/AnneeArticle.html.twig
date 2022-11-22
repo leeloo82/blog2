@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello HomeController!{% endblock %}
+
+{% block body %}
+
+
+    <h1>Liste des articles pour l'année</h1>
+    <div class="tab container">
+        <table class="table table-striped table-dark">
+            <thead>
+            <tr>
+                <th scope="col">Titre</th>
+                <th scope="col">Liens vers descriptif articles</th>
+            </tr>
+            </thead>
+            <tbody>
+            {# acces aux data d'un tableau de tableau #}
+            {% for key in list_article_annee%}
+                {# recuperation de la valeur du click pour traitement pour la requete sql -> recup de l'annee selectionné dans val #}
+                <tr>
+                    <th>{{ key.titre }}</th>
+                    <th><a class=" list-group-item list-group-item-action" href="{{ path('app_titre', { val: key.titre}) }}">Aller vers la description de {{ key.titre }}</a></th>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+{% endblock %}

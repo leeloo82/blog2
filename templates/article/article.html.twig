@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Articles{% endblock %}
+
+{% block body %}
+
+    <div>
+        <h1>Listing des articles</h1>
+
+            {% for key in list_article %}
+                <a class=" list-group-item list-group-item-action" href="{{ path('app_description_article', { id: key.id }) }}">{{key.titre }}</a>
+            {% endfor %}
+
+    </div>
+{% endblock %}
