@@ -12,6 +12,7 @@
             <tr>
                 <th scope="col">Titre</th>
                 <th scope="col">Liens vers descriptif articles</th>
+
             </tr>
             </thead>
             <tbody>
@@ -21,6 +22,7 @@
                 <tr>
                     <th>{{ key.titre }}</th>
                     <th><a class=" list-group-item list-group-item-action" href="{{ path('app_titre', { val: key.titre}) }}">Aller vers la description de {{ key.titre }}</a></th>
+
                 </tr>
             {% endfor %}
             </tbody>

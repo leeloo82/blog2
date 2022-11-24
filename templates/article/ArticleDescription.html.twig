@@ -3,15 +3,31 @@
 
 {% block body %}
     {# declaration de variable dans twig #}
-
-    {% set dateCreation = detail_article.DateCreation|date('d-m-Y')%}
+    {% set dateCreation = article.DateCreation|date('d-m-Y')%}
 
     <div class="card" style="text-align: center;margin:auto auto ;width:50%">
         <div class="card-body">
-            <h5 class="card-title">{{detail_article.titre}}</h5>
-            <p class="card-text">{{detail_article.description}}</p>
+            <h5 class="card-title">{{article.titre}}</h5>
+            <p class="card-text">{{article.description}}</p>
             <p class="card-text">Date de création:{{dateCreation}}</p>
         </div>
     </div>
+    <div>
+        <span class="d-block text-center mx-auto">Vote</span>
+        <div class="table w-25  mx-auto d-flex justify-content-around mt-3">
+            <div>
+
+                <span class="d-inline-block"></span>
+                <form action="{{ path('article_vote', { id: article.id }) }}"  method="POST" class="d-inline-block">
+                    <button type="submit"  name="action" value="add" class="btn btn-dark rounded">+</button>
+                    <button type="submit" name="action" value="remove" class="btn btn-dark rounded">-</button>
+                </form>
+                {# recupertation vote #}
+                <span class="d-inline-block vote">{{ article.votes}} </span>
+            </div>
+
+        </div>
+    </div>
+
 
 {% endblock %}

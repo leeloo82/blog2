@@ -8,6 +8,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use DateTime;
 use App\Entity\Article;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\Request;
 class ArticleController extends AbstractController
 {
     //creation d'une fonction statique d'affichage
@@ -79,7 +80,7 @@ class ArticleController extends AbstractController
         $article = $repository->find($id);
         //self::print_q($article);
         return $this->render('article/ArticleDescription.html.twig', [
-            'detail_article' => $article,
+            'article' => $article,
         ]);
     }
 
@@ -104,10 +105,30 @@ class ArticleController extends AbstractController
      */
     public function afficherById(Article $article): Response
     {
-        //self::print_q($article);
-        return $this->render('article/afficher.html.twig', [
+       // self::print_q($article);
+        return $this->render('article/ArticleDescription.html.twig', [
             'article' => $article,
         ]);
     }
+    /**
+     * @Route("/vote/{id}/voter", name="article_vote",methods="POST")
+     */
+    public function vote($id,Article $article,Request $request,EntityManagerInterface $entityManager )
+    {
+// afficher l'article et le contenu de a requête
+        //dd($article, $request->request->all());
 
+        // récupérer la valeur de l'action'via l'objet request
+        $action = $request->request->get('action');
+
+        if($action === 'add'){
+            $article->addVote($article->setVotes($article->getVotes()+1));
+        }
+        elseif ($action === 'remove'){
+            $article->downVote($article->setVotes($article->getVotes()-1));
+        }
+        $entityManager->flush();
+        // redirige vers la route d’affichage d’un article
+        return $this->redirectToRoute('afficherById', ['id' => $article->getId()]);
+    }
 }

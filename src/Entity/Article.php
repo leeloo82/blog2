@@ -32,6 +32,11 @@ class Article
      */
     private $DateCreation;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $votes = 0;// comme propritée non null initialisation sinon gégération d'une erreur
+
     public function getId(): ?int
     {
         return $this->id;
@@ -71,5 +76,34 @@ class Article
         $this->DateCreation = $DateCreation;
 
         return $this;
+    }
+
+    public function getVotes(): ?int
+    {
+        return $this->votes;
+    }
+
+    public function setVotes(int $votes): self
+    {
+        $this->votes = $votes;
+
+        return $this;
+    }
+    /*
+     * fonction de formatage des données du votes en type string
+     * */
+    public function getVotesString(): string
+    {
+        $prefix = $this->getVotes() >=0 ?'+':'-';
+        return sprintf('%d%d',$prefix,abs($this->getVotes()));
+    }
+
+    public function addVote(){
+        $vote = $this->getVotes();
+        return $vote;
+    }
+    public function downVote(){
+        $vote = $this->getVotes();
+        return $vote;
     }
 }
