@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\ArticleRepository;
 use Doctrine\ORM\Mapping as ORM;
 
+
 /**
  * @ORM\Entity(repositoryClass=ArticleRepository::class)
  */
@@ -36,6 +37,12 @@ class Article
      * @ORM\Column(type="integer")
      */
     private $votes = 0;// comme propritée non null initialisation sinon gégération d'une erreur
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Categorie::class, inversedBy="articles")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $categorie;
 
     public function getId(): ?int
     {
@@ -105,5 +112,17 @@ class Article
     public function downVote(){
         $vote = $this->getVotes();
         return $vote;
+    }
+
+    public function getCategorie(): ?Categorie
+    {
+        return $this->categorie;
+    }
+
+    public function setCategorie(?Categorie $categorie): self
+    {
+        $this->categorie = $categorie;
+
+        return $this;
     }
 }

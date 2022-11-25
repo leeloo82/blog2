@@ -13,11 +13,10 @@
                 <th scope="col">Titre</th>
                 <th scope="col">Liens vers descriptif articles</th>
                 <th>Votes</th>
-
             </tr>
             </thead>
             <tbody>
-            {# acces aux data d'un tableau de tableau #}
+
             {% for key in list_article%}
                 {# recuperation de la valeur du click pour traitement pour la requete sql -> recup de l'annee selectionné dans val #}
                 <tr>
