@@ -65,7 +65,7 @@ class HomeController extends AbstractController
         $article=$article[0];
        // self::print_q($article);
         return $this->render('article/ArticleDescription.html.twig', [
-            'detail_article' => $article,
+            'article' => $article,
         ]);
 
     }

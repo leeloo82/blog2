@@ -96,5 +96,18 @@ class ArticleRepository extends ServiceEntityRepository
             ;
     }
 
+    public function findOneByIdJoinedToCategory(int $articleId): ?Article
+    {
+        $entityManager = $this->getEntityManager();
+
+        $query = $entityManager->createQuery(
+            'SELECT a, c
+            FROM App\Entity\Article a
+            INNER JOIN a.category c
+            WHERE a.id = :id'
+        )->setParameter('id', $articleId);
+
+        return $query->getOneOrNullResult();
+    }
 
 }

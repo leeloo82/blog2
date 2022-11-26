@@ -36,10 +36,20 @@ class ArticleController extends AbstractController
      */
     public function articleObject(EntityManagerInterface $entityManager)
     {
+        //reception de l'objet de la la class repository categorie
+        $id = rand(3,6);
+        $categorie = $entityManager->getRepository(Categorie::class)->find($id);
+
+        $categorie->getNom();
+
+       // dd($categorie);
+
         $article = new Article();
-        $article->setTitre('article 5');
+        $article->setTitre('article '.rand(1,20));
         $article->setDescription('the content is for you');
-        $article->setDateCreation(new DateTime('18-05-2015'));
+        $article->setDateCreation(new DateTime('18-05-2018'));
+        $article->setCategorie($categorie);
+
 
         $entityManager->persist($article);
         $entityManager->flush();
@@ -173,4 +183,6 @@ class ArticleController extends AbstractController
         ]);
 
     }
+
+
 }

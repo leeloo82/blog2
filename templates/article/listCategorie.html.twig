@@ -6,7 +6,8 @@
     <h1>list des categories</h1>
     <ul>
         {% for key in list_categorie %}
-            <li>{{ key.nom }}</li>
+            <a class=" list-group-item list-group-item-action" href="#">{{key.nom}}</a>
+
         {% endfor %}
     </ul>
 

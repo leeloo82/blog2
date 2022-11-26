@@ -13,16 +13,19 @@
                 <th scope="col">Titre</th>
                 <th scope="col">Liens vers descriptif articles</th>
                 <th>Votes</th>
+                <th>Categorie</th>
             </tr>
             </thead>
             <tbody>
 
             {% for key in list_article%}
-                {# recuperation de la valeur du click pour traitement pour la requete sql -> recup de l'annee selectionné dans val #}
+
                 <tr>
                     <th>{{ key.titre }}</th>
+                    {# recuperation de la valeur du click pour traitement pour la requete sql -> recup de l'annee selectionné dans val #}
                     <th> <a class=" list-group-item list-group-item-action" href="{{ path('app_description_article', { id: key.id }) }}">{{key.titre }}</a></th>
                     <th>{{ key.votes }}</th>
+                    <th>{{ key.categorie.nom}}</th>
                 </tr>
             {% endfor %}
             </tbody>
