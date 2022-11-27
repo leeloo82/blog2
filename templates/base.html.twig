@@ -29,8 +29,9 @@
                         <li class="navbar-brand"> <a href="{{path('app_article')}}" title="article" class="text-white" >Articles</a></li>
                         <li class="navbar-brand"> <a href="{{ path('app_magique_article', { value:'magique'}) }}" title="article" class="text-white" >Liste Magique</a></li>
                         <li class="navbar-brand"> <a href="{{ path('afficherById', {id:'1'})}}" title="article" class="text-white" >Requete automatique</a></li>
-                        <li class="navbar-brand"> <a href="{{ path('app_article_categorie')}}" title="article" class="text-white" >Create categorie</a></li>
-                        <li class="navbar-brand"> <a href="{{ path('list_categorie')}}" title="article" class="text-white" >Categorie</a></li>
+                        <li class="navbar-brand"> <a href="{{ path('app_article_categorie')}}" title="categorie" class="text-white" >Create categorie</a></li>
+                        <li class="navbar-brand"> <a href="{{ path('list_categorie')}}" title="categorie" class="text-white" >Categorie</a></li>
+                        <li class="navbar-brand"> <a href="{{ path('app_form_art')}}" title="formulaire" class="text-white" >Formulaire Article</a></li>
                     </ul>
                 </nav>
             {% endblock %}

@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Form\ArticleType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -10,6 +11,7 @@ use App\Entity\Article;
 use App\Entity\Categorie;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
+
 class ArticleController extends AbstractController
 {
     //creation d'une fonction statique d'affichage
@@ -70,11 +72,10 @@ class ArticleController extends AbstractController
 
         //reception de l'objet de la la class repository
         $repository = $entityManager->getRepository(Article::class);
-        //appel de la fonction pour effectuer un select all dans la class repository findall est par defaut
+        //appel de la fonction pour effectuer un select all  dans la class repository pour rendre compatible avec utilisation
+        // de la meme vue que l'affichage par categorie retourne le meme type
         $article = $repository->findArticle();
        // dd($article);
-
-        //dd($article);
 
         return $this->render('article/article.html.twig', [
             'list_article' => $article,
@@ -198,6 +199,38 @@ class ArticleController extends AbstractController
        // dd($article);
         return $this->render('article/article.html.twig', [
             'list_article' => $article,
+        ]);
+    }
+    /**
+     * @Route("/formAddArticle", name="app_form_art")
+     *
+     */
+    public function add(Request $request):response
+    {
+        //creation d'un nouvel objet article vide
+        $article = new Article();
+        //creation d'une nouvelle date dans l'objet article
+        $article->setDateCreation(new DateTime());
+        //creation du formulaire
+        /*definition dy type formulaire provenant de la class ArticleType et dans quel il doit etre creer*/
+        $formArticle = $this->createForm(ArticleType::class,$article);
+
+
+        $formArticle->handleRequest($request);
+        /*si le formulaire est remplis il envoie les datas a la bd et affiche le nouvel article  sinon il afffiche le formulaire*/
+        if ($formArticle->isSubmitted() && $formArticle->isValid()) {
+
+            $article = $formArticle->getData();
+            // ... perform some action, such as saving the task to the database
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($article);
+            $entityManager->flush();
+            return $this->redirectToRoute('afficherById', [
+                'id' => $article->getId()
+            ]);
+        }
+        return $this->render('article/add.html.twig', [
+            'formArticle' => $formArticle->createView()
         ]);
     }
 

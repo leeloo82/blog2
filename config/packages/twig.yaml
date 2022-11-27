@@ -3,6 +3,7 @@ twig:
 
 when@test:
     twig:
-        strict_variables: true
         ## Ajout d'un theme bootstrap aux formulaires
         form_themes: [ 'bootstrap_5_layout.html.twig' ]
+        strict_variables: true
+
