@@ -95,19 +95,39 @@ class ArticleRepository extends ServiceEntityRepository
             ->getResult()
             ;
     }
-
-    public function findOneByIdJoinedToCategory(int $articleId): ?Article
+    /**
+    //     * @return Article[] Returns an array of Article objects
+    //     */
+    public function findArticle():array
     {
-        $entityManager = $this->getEntityManager();
+        $connexion = $this->getEntityManager()->getConnection();
 
-        $query = $entityManager->createQuery(
-            'SELECT a, c
-            FROM App\Entity\Article a
-            INNER JOIN a.category c
-            WHERE a.id = :id'
-        )->setParameter('id', $articleId);
+        $sql= 'SELECT * FROM Article '
+        ;
+        $stmt = $connexion->prepare($sql);
+        $resultSet = $stmt->executeQuery();
+        // returns an array of arrays (i.e. a raw data set)
+        return $resultSet->fetchAllAssociative();
 
-        return $query->getOneOrNullResult();
+
+
+    }
+    /**
+    //     * @return Article[] Returns an array of Article objects
+    //     */
+    public function findOneByIdJoinedToCategory(int $CategorieId):array
+    {
+        $connexion = $this->getEntityManager()->getConnection();
+
+       $sql= 'SELECT * FROM Article a where a.categorie_id = '.$CategorieId
+            ;
+        $stmt = $connexion->prepare($sql);
+        $resultSet = $stmt->executeQuery();
+        // returns an array of arrays (i.e. a raw data set)
+        return $resultSet->fetchAllAssociative();
+
+
+
     }
 
 }

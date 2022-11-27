@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Categorie{% endblock %}
+
+{% block body %}
+    <h1>list des article via categories</h1>
+    {% for key in list_categorie_article%}
+
+        {# recuperation de la valeur du click pour traitement pour la requete sql -> recup de l'annee selectionné dans val #}
+        <th> <a class=" list-group-item list-group-item-action" href="{{ path('app_description_article', { id: key.id }) }}">{{key.titre }}</a></th>
+        <th>{{ key.votes }}</th>
+        <th>{{ key.titre }}</th>
+
+        <th>{{ key.categorie_id}}</th>
+
+
+    {% endfor %}
+
+
+{% endblock %}

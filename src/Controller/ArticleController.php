@@ -71,8 +71,10 @@ class ArticleController extends AbstractController
         //reception de l'objet de la la class repository
         $repository = $entityManager->getRepository(Article::class);
         //appel de la fonction pour effectuer un select all dans la class repository findall est par defaut
-        $article = $repository->findAll();
-        //self::print_q($article);
+        $article = $repository->findArticle();
+       // dd($article);
+
+        //dd($article);
 
         return $this->render('article/article.html.twig', [
             'list_article' => $article,
@@ -183,6 +185,20 @@ class ArticleController extends AbstractController
         ]);
 
     }
-
+    /**
+     * @Route("/Categorie/{id}", name="list_categorie_article")
+     *
+     */
+    public function showListCategArt(EntityManagerInterface $entityManager, int $id): Response
+    {
+        //reception de l'objet de la la class repository
+        $repository = $entityManager->getRepository(Article::class);
+        //appel de la fonction pour effectuer un select all dans la class repository find est par defaut
+        $article = $repository->findOneByIdJoinedToCategory($id);
+       // dd($article);
+        return $this->render('article/article.html.twig', [
+            'list_article' => $article,
+        ]);
+    }
 
 }

@@ -6,7 +6,7 @@
     <h1>list des categories</h1>
     <ul>
         {% for key in list_categorie %}
-            <a class=" list-group-item list-group-item-action" href="#">{{key.nom}}</a>
+            <a class=" list-group-item list-group-item-action" href="{{ path('list_categorie_article', { id: key.id }) }}">{{key.nom}}</a>
 
         {% endfor %}
     </ul>
