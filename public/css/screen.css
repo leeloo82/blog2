@@ -5,9 +5,14 @@ footer{
 }
 
 h1{
-text-transform:capitalize;
-text-align:center;
-color:blue;
-
+    text-transform:capitalize;
+    text-align:center;
+    color:blue;
 }
-
+/*
+.form{
+    width:100px;
+    height:300px;
+    border: 2px solid black;
+}
+*/

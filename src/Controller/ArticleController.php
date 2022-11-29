@@ -3,6 +3,8 @@
 namespace App\Controller;
 
 use App\Form\ArticleType;
+use App\Form\CategorieType;
+use App\Repository\CategorieRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -225,6 +227,7 @@ class ArticleController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($article);
             $entityManager->flush();
+            //on regirige vers la page de vie article par son id afin de visualiser l'article crée
             return $this->redirectToRoute('afficherById', [
                 'id' => $article->getId()
             ]);
@@ -232,6 +235,40 @@ class ArticleController extends AbstractController
         return $this->render('article/add.html.twig', [
             'formArticle' => $formArticle->createView()
         ]);
+    }
+    /**
+     * @Route("/formAddCategorie", name="app_form_categ")
+     *
+     */
+    public function addFormCateg(Request $request):response
+    {
+
+        //creation d'un new objet categorie
+        $categorie = new Categorie();
+
+        //creation du formulaire
+        $formCategorie =$this->createForm(CategorieType::class,$categorie);
+
+        // On récupère la requête du formulaire
+        $formCategorie->handleRequest($request);
+
+        /*si le formulaire est remplis il envoie les datas a la bd et affiche le nouvel article  sinon il afffiche le formulaire*/
+        if ($formCategorie->isSubmitted() && $formCategorie->isValid()) {
+
+            $categorie = $formCategorie->getData();
+            // ... perform some action, such as saving the task to the database
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($categorie);
+            $entityManager->flush();
+            //on regirige vers la page de vie article par son id afin de visualiser l'article crée
+            return $this->redirectToRoute('list_categorie', [
+                'id' => $categorie->getId()
+            ]);
+        }
+        return $this->render('article/addCateg.html.twig', [
+            'formCategorie' => $formCategorie->createView()
+        ]);
+
     }
 
 }

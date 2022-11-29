@@ -113,7 +113,11 @@ class ArticleRepository extends ServiceEntityRepository
 
     }
     /**
-    //     * @return Article[] Returns an array of Article objects
+     * //     * @return Article[] Returns an array of Article objects
+     * @param int $CategorieId
+     * @return array
+     * @throws \Doctrine\DBAL\Exception
+     */
     //     */
     public function findOneByIdJoinedToCategory(int $CategorieId):array
     {

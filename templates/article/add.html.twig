@@ -8,15 +8,38 @@
 
     <div class="example-wrapper">
         <h1>creation d'un nouvelle article via formulaire</h1>
-        <div class="container">
-            <div class="row">
-                <div class="col-md-4">
-                    {{ form_start(formArticle) }}
-                    <input type="submit" value="SEND" class="btn btn-primary"/>
-                    {{ form_end(formArticle) }}
-
+        <div class="form container ">
+            {{ form_start(formArticle) }}
+            {# {{dump()}} #}
+                <div class="form-group">
+                    {# use pour les label#}
+                    {{ form_label(formArticle.titre,'Titre de l\'article') }}
+                    {# use pour le champ de type input #}
+                    {{ form_widget(formArticle.titre,{'attr':{'class':'form-control'}}) }}
+                    {{ form_errors(formArticle.titre) }}
                 </div>
-            </div>
+                <div class="form-group">
+                    {# use pour les label#}
+                    {{ form_label(formArticle.titre,'Description de l\'article') }}
+                    {# use pour le champ de type input #}
+                    {{ form_widget(formArticle.description,{'attr':{'class':'form-control form-control'}}) }}
+                    {{ form_errors(formArticle.description) }}
+                </div>
+                <div class="form-group">
+                    {{ form_label(formArticle.DateCreation) }}
+                    {{ form_widget(formArticle.DateCreation) }}
+                </div>
+                <div class="form-group">
+                    {# use pour les label#}
+                    {{ form_label(formArticle.categorie,'Categorie') }}
+                    {{ form_widget(formArticle.categorie) }}
+                </div>
+                <div>
+                    <input type="submit" value="Enregistrer" class="btn btn-primary"/>
+                </div>
+
+            {{ form_end(formArticle) }}
+
         </div>
        {#{{form(formArticle)}} #}
 

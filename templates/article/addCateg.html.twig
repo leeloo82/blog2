@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}formulaire Article{% endblock %}
+
+{% block body %}
+    <div>
+        <h1>formulaire de création d'une nouvelle catégorie</h1>
+        {# {{dump(formCategorie.nom)}} #}
+
+        <div class="container">
+            {{ form_start(formCategorie ) }}
+            <div class="form-group">
+                {{ form_label(formCategorie.nom,'Nom de la catégorie' )}}
+                {{ form_widget(formCategorie.nom,{'attr':{'class':'form-control'}}) }}
+            </div>
+            <div>
+                <input type="submit" value="Enregistrer" class="btn btn-primary"/>
+            </div>
+
+            {{ form_end(formCategorie ) }}
+        </div>
+    </div>
+{% endblock %}
