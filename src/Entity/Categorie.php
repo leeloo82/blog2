@@ -83,16 +83,5 @@ class Categorie
         return $this;
     }
 
-    /**
-     * fonction de validation longeur du champ nom de categorie
-    */
-    public static function loadValidatorMetadata(ClassMetadata $metadata)
-    {
-        $metadata->addPropertyConstraint('nom', new Assert\Length([
-            'min' => 2,
-            'max' => 10,
-            'minMessage' => 'Your name category must be at least {{ limit }} characters long',
-            'maxMessage' => 'Your name category cannot be longer than {{ limit }} characters',
-        ]));
-    }
+
 }

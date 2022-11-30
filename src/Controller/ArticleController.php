@@ -270,5 +270,34 @@ class ArticleController extends AbstractController
         ]);
 
     }
+    /**
+     * @Route("/editArticle/{id}", name="app_edit_article")
+     *
+     */
+    public function edit(Request $request,Article $article)
+    {
+//creation du formulaire
+        /*definition dy type formulaire provenant de la class ArticleType et dans quel il doit etre creer*/
+        $formArticle = $this->createForm(ArticleType::class,$article);
+
+
+        $formArticle->handleRequest($request);
+        /*si le formulaire est remplis il envoie les datas a la bd et affiche le nouvel article  sinon il afffiche le formulaire*/
+        if ($formArticle->isSubmitted() && $formArticle->isValid()) {
+
+            $article = $formArticle->getData();
+            // ... perform some action, such as saving the task to the database
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($article);
+            $entityManager->flush();
+            //on regirige vers la page de vie article par son id afin de visualiser l'article crée
+            return $this->redirectToRoute('afficherById', [
+                'id' => $article->getId()
+            ]);
+        }
+        return $this->render('article/editionArticle.html.twig', [
+            'formArticle' => $formArticle->createView()
+        ]);
+    }
 
 }

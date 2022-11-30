@@ -14,6 +14,8 @@
                 <th scope="col">Liens vers descriptif articles</th>
                 <th>Votes</th>
                 <th>Categorie</th>
+                <th>Mofifications</th>
+                <th>Suppression</th>
             </tr>
             </thead>
             <tbody>
@@ -26,6 +28,9 @@
                     <th> <a class=" list-group-item list-group-item-action" href="{{ path('app_description_article', { id: key.id }) }}">{{key.titre }}</a></th>
                     <th>{{ key.votes }}</th>
                     <th>{{ key.categorie_id}}</th>
+                    <th><a class=" list-group-item list-group-item-action" href="{{ path('app_edit_article', { id: key.id }) }}">Edit</a></th>
+                    <th><a class=" list-group-item list-group-item-action" href="#">Delete</a></th>
+
                 </tr>
             {% endfor %}
             </tbody>
