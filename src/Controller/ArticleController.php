@@ -299,5 +299,21 @@ class ArticleController extends AbstractController
             'formArticle' => $formArticle->createView()
         ]);
     }
+    /**
+     * @Route("/deleteArticle/{id}", name="app_delete_article")
+     *
+     */
+    function delete(Article $article){
+
+        //recuperation de l'entity manager
+         $repository = $this->getDoctrine()->getManager();
+         //appel d ela methode remove avec le parametre de suppression
+         $repository->remove($article);
+
+         //mise a jour de la data base
+        $repository->flush();
+
+        return new Response('suppression executé');
+    }
 
 }
